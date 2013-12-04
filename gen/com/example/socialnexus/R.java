@@ -27,43 +27,41 @@ public final class R {
         public static final int ic_twitter=0x7f020003;
     }
     public static final class id {
-        public static final int FacebookBox=0x7f080012;
-        public static final int GPlusBox=0x7f080014;
-        public static final int LoginButton=0x7f080009;
-        public static final int Password1=0x7f08000f;
-        public static final int Password2=0x7f08000e;
-        public static final int PasswordText=0x7f080007;
-        public static final int RegisterButton=0x7f08000a;
-        public static final int TwitterBox=0x7f080013;
-        public static final int Username=0x7f080010;
-        public static final int UsernameText=0x7f080008;
-        public static final int action_settings=0x7f08001a;
+        public static final int FacebookBox=0x7f080011;
+        public static final int GPlusBox=0x7f080013;
+        public static final int LoginButton=0x7f080008;
+        public static final int Password1=0x7f08000e;
+        public static final int Password2=0x7f08000d;
+        public static final int PasswordText=0x7f080006;
+        public static final int RegisterButton=0x7f080009;
+        public static final int TwitterBox=0x7f080012;
+        public static final int Username=0x7f08000f;
+        public static final int UsernameText=0x7f080007;
+        public static final int action_settings=0x7f080019;
         public static final int addbutton=0x7f080004;
-        public static final int content=0x7f08000c;
-        public static final int handle=0x7f08000d;
+        public static final int content=0x7f08000b;
+        public static final int handle=0x7f08000c;
         public static final int imageView1=0x7f080000;
-        public static final int imageView2=0x7f080015;
-        public static final int imageView3=0x7f080016;
-        public static final int next=0x7f080018;
+        public static final int imageView2=0x7f080014;
+        public static final int imageView3=0x7f080015;
+        public static final int next=0x7f080017;
         public static final int password=0x7f080001;
-        public static final int progressBar1=0x7f080019;
-        public static final int section_label=0x7f080006;
-        public static final int slidingDrawer1=0x7f08000b;
+        public static final int progressBar1=0x7f080018;
+        public static final int slidingDrawer1=0x7f08000a;
         public static final int textView1=0x7f080003;
         public static final int textView2=0x7f080005;
-        public static final int textView3=0x7f080011;
-        public static final int textView4=0x7f080017;
+        public static final int textView3=0x7f080010;
+        public static final int textView4=0x7f080016;
         public static final int username=0x7f080002;
     }
     public static final class layout {
         public static final int addfacebook=0x7f030000;
         public static final int addgplus=0x7f030001;
         public static final int addtwitter=0x7f030002;
-        public static final int fragment_main_dummy=0x7f030003;
-        public static final int login=0x7f030004;
-        public static final int main=0x7f030005;
-        public static final int register=0x7f030006;
-        public static final int splash=0x7f030007;
+        public static final int login=0x7f030003;
+        public static final int main=0x7f030004;
+        public static final int register=0x7f030005;
+        public static final int splash=0x7f030006;
     }
     public static final class menu {
         public static final int addfacebook=0x7f070000;

@@ -9,7 +9,7 @@
     tools:context=".RegisterActivity" >
 
     <EditText
-        android:id="@+id/Password2"
+        android:id="@+id/registerpassword2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -21,47 +21,47 @@
     </EditText>
 
     <EditText
-        android:id="@+id/Password1"
+        android:id="@+id/registerpassword1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/Password2"
+        android:layout_above="@+id/registerpassword2"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"
         android:ems="10"
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/Username"
+        android:id="@+id/registeremail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/Password1"
+        android:layout_above="@+id/registerpassword1"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"
-        android:ems="10" 
-        android:inputType="text" />
+        android:ems="10"
+        android:inputType="textEmailAddress" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/Username"
-        android:layout_alignLeft="@+id/Username"
-        android:text="@string/username" />
+        android:layout_above="@+id/registeremail"
+        android:layout_alignLeft="@+id/registeremail"
+        android:text="@string/prompt_email" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/Password1"
-        android:layout_alignLeft="@+id/Password1"
-        android:text="@string/password" />
+        android:layout_above="@+id/registerpassword1"
+        android:layout_alignLeft="@+id/registerpassword1"
+        android:text="@string/prompt_password" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/Password2"
-        android:layout_alignLeft="@+id/Password2"
+        android:layout_above="@+id/registerpassword2"
+        android:layout_alignLeft="@+id/registerpassword2"
         android:text="@string/confirmpassword" />
 
 	<CheckBox
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
         android:layout_marginTop="5dp"
-        android:layout_alignLeft="@+id/Username"
+        android:layout_alignLeft="@+id/registeremail"
         android:text="" />
         
     <CheckBox
@@ -88,13 +88,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
         android:layout_marginTop="5dp"
-        android:layout_alignRight="@+id/Username" />
+        android:layout_alignRight="@+id/registeremail" />
 
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Password2"
+        android:layout_below="@+id/registerpassword2"
         android:layout_marginTop="50dp"
         android:layout_alignRight="@+id/FacebookBox"
         android:layout_marginRight="-7dp"
@@ -121,9 +121,9 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Password2"
-        android:layout_alignRight="@+id/Password2"
-        android:layout_below="@+id/Password2"
+        android:layout_alignLeft="@+id/registerpassword2"
+        android:layout_alignRight="@+id/registerpassword2"
+        android:layout_below="@+id/registerpassword2"
         android:text="@string/choices" />
 
     <Button

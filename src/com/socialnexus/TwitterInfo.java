@@ -1,4 +1,4 @@
-package com.example.socialnexus;
+package com.socialnexus;
 
 import android.content.SharedPreferences;
 import twitter4j.*;

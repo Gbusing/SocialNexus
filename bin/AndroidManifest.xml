@@ -5,8 +5,11 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="4"
+        />
+    
+    <uses-permission
+		android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -21,10 +24,20 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
         </activity>
         <activity
             android:name="com.example.socialnexus.RegisterActivity"
-            android:label="@string/title_activity_register" >
+            android:label="@string/title_activity_register" 
+            android:launchMode="singleInstance">            
+            <intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="social-nexus-android" />
+			</intent-filter>
+
+            
         </activity>
         <activity
             android:name="com.example.socialnexus.SplashActivity"

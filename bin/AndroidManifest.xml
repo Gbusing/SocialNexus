@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.socialnexus.LLoginActivity"
+            android:name="com.socialnexus.LoginActivity"
             android:label="@string/title_activity_llogin"
             android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>

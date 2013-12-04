@@ -1,4 +1,4 @@
-package com.socialnexusfacebook;
+package com.socialnexus;
 
 import android.content.Intent;
 import android.os.Bundle;

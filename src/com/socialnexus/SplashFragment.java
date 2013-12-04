@@ -1,4 +1,4 @@
-package com.socialnexusfacebook;
+package com.socialnexus;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

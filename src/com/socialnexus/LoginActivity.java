@@ -40,13 +40,6 @@ public class LoginActivity extends Activity
 
 		creds = getSharedPreferences("Preferences", MODE_PRIVATE);
 
-		if (creds.getString("LoggedIn", null) != null)
-		{
-			Intent intent = new Intent(this, MainActivity.class);
-			startActivity(intent);
-			return;
-		}
-
 		mStayLoggedIn = (CheckBox) findViewById(R.id.stayloggedBox);
 		mEmailView = (EditText) findViewById(R.id.email);
 		mPasswordView = (EditText) findViewById(R.id.password);
@@ -151,7 +144,7 @@ public class LoginActivity extends Activity
 			// Perform the user login attempt.
 			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 
-			// Email has no associated login
+			// Email has no associated login, jump to register page
 			if (creds.getString(mEmail, null) == null)
 			{
 				Intent intent = new Intent(this, RegisterActivity.class);

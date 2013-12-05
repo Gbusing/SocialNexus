@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="5" 
-        android:targetSdkVersion="11"/>
+        android:minSdkVersion="5"
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.socialnexus.MainActivity"
-            android:label="@string/title_activity_main" android:launchMode="singleTask">
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,7 +33,8 @@
         <activity
             android:name="com.socialnexus.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:launchMode="singleInstance" >
+            android:launchMode="singleTask"
+            android:process=":register" >
         </activity>
         <activity
             android:name="com.socialnexus.AddfacebookActivity"

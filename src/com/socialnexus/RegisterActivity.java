@@ -51,6 +51,22 @@ public class RegisterActivity extends Activity
 		return true;
 	}
 
+	/**
+	 * Catch when Twitter redirects back to our {@link CALLBACK_URL} We use onNewIntent as in our manifest we have singleInstance="true" if we did not the
+	 * getOAuthAccessToken() call would fail
+	 */
+	@Override
+	protected void onNewIntent(Intent newintent)
+	{
+		super.onNewIntent(newintent);
+		setIntent(newintent);
+
+		if (newintent != null && newintent.getData().toString().startsWith(TwitterUtilities.CALLBACK_URL))
+		{
+			twUtils.dealWithTwitterResponse(newintent);
+		}
+	}
+
 	public void register(View view)
 	{
 		// Reset errors.
@@ -146,23 +162,11 @@ public class RegisterActivity extends Activity
 				Intent intent = new Intent(this, AddgplusActivity.class);
 				startActivity(intent);
 			}
-			else
-			{
-				Intent intent = new Intent(this, MainActivity.class);
-				intent.putExtra("com.socialnexus.loggedin", mEmail);
-				startActivity(intent);
-			}
+
+			Intent intent = new Intent(this, MainActivity.class);
+			intent.putExtra("com.socialnexus.loggedin", mEmail);
+			startActivity(intent);
 		}
 	}
 
-	/**
-	 * Catch when Twitter redirects back to our {@link CALLBACK_URL} We use onNewIntent as in our manifest we have singleInstance="true" if we did not the
-	 * getOAuthAccessToken() call would fail
-	 */
-	@Override
-	protected void onNewIntent(Intent intent)
-	{
-		super.onNewIntent(intent);
-		twUtils.dealWithTwitterResponse(intent);
-	}
 }

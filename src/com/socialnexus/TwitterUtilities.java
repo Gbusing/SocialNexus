@@ -54,13 +54,12 @@ public class TwitterUtilities
 	{
 		try
 		{
-
-			mReqToken = mTwitter.getOAuthRequestToken(TwitterUtilities.CALLBACK_URL);
+			mReqToken = mTwitter.getOAuthRequestToken(CALLBACK_URL);
 
 			WebView twitterSite = new WebView(ctx);
 			twitterSite.loadUrl(mReqToken.getAuthenticationURL());
-			act.setContentView(twitterSite);
 
+			act.setContentView(twitterSite);
 		}
 		catch (TwitterException e)
 		{
@@ -101,11 +100,11 @@ public class TwitterUtilities
 			twitterAccessToken = at.getToken();
 			twitterAccessSecret = at.getTokenSecret();
 
-			creds.edit().putString(act.getIntent().getStringExtra("com.socialnexus.loggedin").concat("-twAccessToken"), twitterAccessToken).commit();
-			creds.edit().putString(act.getIntent().getStringExtra("com.socialnexus.loggedin").concat("-twAccessSecret"), twitterAccessSecret).commit();
+			creds.edit().putString(creds.getString("LoggedIn", null).concat("-twAccessToken"), twitterAccessToken).commit();
+			creds.edit().putString(creds.getString("LoggedIn", null).concat("-twAccessSecret"), twitterAccessSecret).commit();
 
 			// Set the content view back after we changed to a webview
-			act.setContentView(R.layout.main);
+			// act.setContentView(R.layout.main);
 
 		}
 		catch (TwitterException e)

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <fragment android:name="com.SocialNexus.SelectionFragment"
+          android:id="@+id/selectionFragment"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+    <fragment android:name="com.SocialNexus.SplashFragment"
+          android:id="@+id/splashFragment"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+    <fragment android:name="com.facebook.widget.UserSettingsFragment"
+          android:id="@+id/userSettingsFragment"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+</LinearLayout>

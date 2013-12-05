@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.socialnexus"
+    package="com.socialnexus"
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="4" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+	<uses-permission 
+	    android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,52 +16,23 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.socialnexus.LoginActivity"
-            android:label="@string/title_activity_llogin"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:name="com.socialnexus.MainActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
-            android:name="com.socialnexus.LoginActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="com.socialnexus.RegisterActivity"
-            android:label="@string/title_activity_register"
-            android:launchMode="singleInstance" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="social-nexus-android" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.socialnexus.SplashActivity"
-            android:label="@string/title_activity_splash" >
-        </activity>
-        <activity
-            android:name="com.socialnexus.AddfacebookActivity"
-            android:label="@string/title_activity_addfacebook" >
-        </activity>
-        <activity
-            android:name="com.socialnexus.AddtwitterActivity"
-            android:label="@string/title_activity_addtwitter" >
-        </activity>
-        <activity
-            android:name="com.socialnexus.AddgplusActivity"
-            android:label="@string/title_activity_addgplus" >
-        </activity>
-        <activity
-            android:name="com.socialnexus.MainActivity"
-            android:label="@string/title_activity_main" >
-        </activity>
+        	android:name="com.facebook.LoginActivity"
+        	android:label="@string/title_facebook_login" >
+   		</activity>
+   		 
+        <meta-data 
+            android:name="com.facebook.sdk.ApplicationId" 
+            android:value="@string/app_id"/>
     </application>
 
 </manifest>

@@ -5,11 +5,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <fragment android:name="com.socialnexus.SelectionFragment"
+    <fragment android:name="com.socialnexusfacebook.SelectionFragment"
           android:id="@+id/selectionFragment"
           android:layout_width="match_parent"
           android:layout_height="match_parent" />
-    <fragment android:name="com.socialnexus.SplashFragment"
+    <fragment android:name="com.socialnexusfacebook.SplashFragment"
           android:id="@+id/splashFragment"
           android:layout_width="match_parent"
           android:layout_height="match_parent" />

@@ -10,11 +10,11 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.socialnexus.R;
-
 public class RegisterActivity extends Activity
 {
-	SharedPreferences creds;
+	private SharedPreferences creds;
+
+	private TwitterUtilities twUtils;
 
 	private EditText mEmailView;
 	private EditText mPasswordView;
@@ -51,7 +51,7 @@ public class RegisterActivity extends Activity
 		return true;
 	}
 
-	public void next(View view)
+	public void register(View view)
 	{
 		// Reset errors.
 		mEmailView.setError(null);
@@ -94,10 +94,11 @@ public class RegisterActivity extends Activity
 		}
 
 		// Confirm that password match
-		if (mPassword != mPassword2)
+		if (mPassword.compareTo(mPassword2) != 0)
 		{
 			mPasswordView.setError(getString(R.string.password_mismatch));
 			mPasswordView2.setError(getString(R.string.password_mismatch));
+			focusView = mPasswordView2;
 			cancel = true;
 		}
 
@@ -128,23 +129,40 @@ public class RegisterActivity extends Activity
 
 			if (facebookBox.isChecked())
 			{
+				// Probably wrong
 				Intent intent = new Intent(this, AddfacebookActivity.class);
 				intent.putExtra("twitter", twitterBox.isChecked());
 				intent.putExtra("gplus", gplusBox.isChecked());
 				startActivity(intent);
 			}
-			else if (twitterBox.isChecked())
+			if (twitterBox.isChecked())
 			{
-				Intent intent = new Intent(this, AddtwitterActivity.class);
-				intent.putExtra("gplus", gplusBox.isChecked());
+				twUtils = new TwitterUtilities(this, creds);
+				twUtils.loginTwitter();
+			}
+			if (gplusBox.isChecked())
+			{
+				// Looks like activites actually aren't the solution.
+				Intent intent = new Intent(this, AddgplusActivity.class);
 				startActivity(intent);
 			}
-			else if (gplusBox.isChecked())
+			else
 			{
-				Intent intent = new Intent(this, AddgplusActivity.class);
+				Intent intent = new Intent(this, MainActivity.class);
+				intent.putExtra("com.socialnexus.loggedin", mEmail);
 				startActivity(intent);
 			}
 		}
 	}
 
+	/**
+	 * Catch when Twitter redirects back to our {@link CALLBACK_URL} We use onNewIntent as in our manifest we have singleInstance="true" if we did not the
+	 * getOAuthAccessToken() call would fail
+	 */
+	@Override
+	protected void onNewIntent(Intent intent)
+	{
+		super.onNewIntent(intent);
+		twUtils.dealWithTwitterResponse(intent);
+	}
 }

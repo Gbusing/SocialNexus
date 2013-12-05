@@ -23,5 +23,10 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
     <string name="password_mismatch">Password Mismatch</string>
+    <string name="wrong_password">Password Incorrect</string>
+    <string name="staylogged">Stay Logged In</string>
+    <string name="logout">Logout</string>
+    <string name="title_activity_login">Login</string>
+    <string name="socialnexus">SocialNexus</string>
 
 </resources>

@@ -132,7 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/TwitterBox"
         android:layout_centerHorizontal="true"
-        android:onClick="next"
-        android:text="@string/next" />
+        android:onClick="register"
+        android:text="@string/register" />
 
 </RelativeLayout>

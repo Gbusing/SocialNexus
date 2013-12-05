@@ -11,12 +11,12 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
 /**
- * Activity which displays a login screen to the user, offering registration as
- * well.
+ * Activity which displays a login screen to the user, offering registration as well.
  */
 public class LoginActivity extends Activity
 {
@@ -30,6 +30,7 @@ public class LoginActivity extends Activity
 	private EditText mEmailView;
 	private EditText mPasswordView;
 	private TextView mLoginStatusMessageView;
+	private CheckBox mStayLoggedIn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -39,6 +40,14 @@ public class LoginActivity extends Activity
 
 		creds = getSharedPreferences("Preferences", MODE_PRIVATE);
 
+		if (creds.getString("LoggedIn", null) != null)
+		{
+			Intent intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
+			return;
+		}
+
+		mStayLoggedIn = (CheckBox) findViewById(R.id.stayloggedBox);
 		mEmailView = (EditText) findViewById(R.id.email);
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener()
@@ -75,10 +84,19 @@ public class LoginActivity extends Activity
 		return true;
 	}
 
+	@Override
+	public void onBackPressed()
+	{
+		super.onBackPressed();
+
+		Intent intent = new Intent(this, MainActivity.class);
+		intent.putExtra("com.socialnexus.exit", true);
+		startActivity(intent);
+	}
+
 	/**
-	 * Attempts to sign in or register the account specified by the login form.
-	 * If there are form errors (invalid email, missing fields, etc.), the
-	 * errors are presented and no actual login attempt is made.
+	 * Attempts to sign in or register the account specified by the login form. If there are form errors (invalid email, missing fields, etc.), the errors are
+	 * presented and no actual login attempt is made.
 	 */
 	public void attemptLogin()
 	{
@@ -133,17 +151,30 @@ public class LoginActivity extends Activity
 			// Perform the user login attempt.
 			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 
-			if (creds.getString(mEmail, null) == mPassword)
-			{
-				Intent intent = new Intent(this, MainActivity.class);
-				startActivity(intent);
-			}
-			else
+			// Email has no associated login
+			if (creds.getString(mEmail, null) == null)
 			{
 				Intent intent = new Intent(this, RegisterActivity.class);
 				intent.putExtra("com.socialnexus.email", mEmail);
 				intent.putExtra("com.socialnexus.password", mPassword);
 				startActivity(intent);
+			}
+			// Successful login
+			else if (creds.getString(mEmail, null).compareTo(mPassword) == 0)
+			{
+				if (mStayLoggedIn.isChecked())
+				{
+					creds.edit().putString("LoggedIn", mEmail).commit();
+				}
+
+				Intent intent = new Intent(this, MainActivity.class);
+				intent.putExtra("com.socialnexus.loggedin", mEmail);
+				startActivity(intent);
+			}
+			else
+			{
+				mPasswordView.setError(getString(R.string.wrong_password));
+				mPasswordView.requestFocus();
 			}
 		}
 	}

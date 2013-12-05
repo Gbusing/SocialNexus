@@ -2,19 +2,21 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-
-    <fragment android:name="com.SocialNexus.SelectionFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <fragment class="com.socialnexus.SelectionFragment"
           android:id="@+id/selectionFragment"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent" />
-    <fragment android:name="com.SocialNexus.SplashFragment"
+          android:layout_weight="1"
+          android:layout_width="0dp"
+          android:layout_height="0dp" />
+    <fragment class="com.socialnexus.SplashFragment"
           android:id="@+id/splashFragment"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent" />
-    <fragment android:name="com.facebook.widget.UserSettingsFragment"
+          android:layout_weight="1"
+          android:layout_width="0dp"
+          android:layout_height="0dp" />
+    <fragment class="com.facebook.widget.UserSettingsFragment"
           android:id="@+id/userSettingsFragment"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent" />
+          android:layout_weight="1"
+          android:layout_width="0dp"
+          android:layout_height="0dp" />
 </LinearLayout>

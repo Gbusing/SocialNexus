@@ -351,7 +351,7 @@ containing a value of this type.
         public static final int com_facebook_list_section_header_background=0x7f02000d;
         public static final int com_facebook_loginbutton_silver=0x7f02000e;
         public static final int com_facebook_logo=0x7f02000f;
-        public static final int com_facebook_picker_default_separator_color=0x7f020026;
+        public static final int com_facebook_picker_default_separator_color=0x7f020029;
         public static final int com_facebook_picker_item_background=0x7f020010;
         public static final int com_facebook_picker_list_focused=0x7f020011;
         public static final int com_facebook_picker_list_longpressed=0x7f020012;
@@ -370,16 +370,19 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_background_gradient=0x7f02001f;
         public static final int default_ptr_flip=0x7f020020;
         public static final int default_ptr_rotate=0x7f020021;
-        public static final int ic_launcher=0x7f020022;
-        public static final int indicator_arrow=0x7f020023;
-        public static final int indicator_bg_bottom=0x7f020024;
-        public static final int indicator_bg_top=0x7f020025;
+        public static final int ic_facebook=0x7f020022;
+        public static final int ic_gplus=0x7f020023;
+        public static final int ic_launcher=0x7f020024;
+        public static final int ic_twitter=0x7f020025;
+        public static final int indicator_arrow=0x7f020026;
+        public static final int indicator_bg_bottom=0x7f020027;
+        public static final int indicator_bg_top=0x7f020028;
     }
     public static final class id {
         public static final int action_settings=0x7f050031;
         public static final int both=0x7f050003;
-        public static final int com_dhsoftware_android_myNewsfeedFragment_userContainer=0x7f050027;
-        public static final int com_dhsoftware_android_myNewsfeedFragment_userProfilePicture=0x7f050028;
+        public static final int com_dhsoftware_android_myNewsfeedFragment_userContainer=0x7f05002c;
+        public static final int com_dhsoftware_android_myNewsfeedFragment_userProfilePicture=0x7f05002d;
         public static final int com_facebook_login_activity_progress_bar=0x7f050014;
         public static final int com_facebook_picker_activity_circle=0x7f050013;
         public static final int com_facebook_picker_checkbox=0x7f050016;
@@ -401,24 +404,24 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_logo_image=0x7f050024;
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f050025;
         public static final int disabled=0x7f050000;
-        public static final int fl_inner=0x7f05002b;
+        public static final int fl_inner=0x7f050027;
         public static final int flip=0x7f050008;
         public static final int gridview=0x7f050009;
         public static final int large=0x7f05000e;
         public static final int login_button=0x7f050030;
         public static final int manualOnly=0x7f050004;
-        public static final int myNewsFeedFragment_userName=0x7f050029;
-        public static final int myNewsfeedFragment_userNewsfeed=0x7f05002a;
+        public static final int myNewsFeedFragment_userName=0x7f05002e;
+        public static final int myNewsfeedFragment_userNewsfeed=0x7f05002f;
         public static final int normal=0x7f05000d;
         public static final int picker_subtitle=0x7f050021;
         public static final int pullDownFromTop=0x7f050005;
         public static final int pullFromEnd=0x7f050002;
         public static final int pullFromStart=0x7f050001;
         public static final int pullUpFromBottom=0x7f050006;
-        public static final int pull_to_refresh_image=0x7f05002c;
-        public static final int pull_to_refresh_progress=0x7f05002d;
-        public static final int pull_to_refresh_sub_text=0x7f05002f;
-        public static final int pull_to_refresh_text=0x7f05002e;
+        public static final int pull_to_refresh_image=0x7f050028;
+        public static final int pull_to_refresh_progress=0x7f050029;
+        public static final int pull_to_refresh_sub_text=0x7f05002b;
+        public static final int pull_to_refresh_text=0x7f05002a;
         public static final int rotate=0x7f050007;
         public static final int scrollview=0x7f05000b;
         public static final int selectionFragment=0x7f05000f;
@@ -443,16 +446,19 @@ containing a value of this type.
         public static final int com_facebook_placepickerfragment_list_row=0x7f03000c;
         public static final int com_facebook_search_bar_layout=0x7f03000d;
         public static final int com_facebook_usersettingsfragment=0x7f03000e;
-        public static final int mynewsfeed_fragment=0x7f03000f;
-        public static final int pull_to_refresh_header_horizontal=0x7f030010;
-        public static final int pull_to_refresh_header_vertical=0x7f030011;
-        public static final int splash=0x7f030012;
+        public static final int pull_to_refresh_header_horizontal=0x7f03000f;
+        public static final int pull_to_refresh_header_vertical=0x7f030010;
+        public static final int selectionfragment=0x7f030011;
+        public static final int splashfragment=0x7f030012;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
     }
     public static final class string {
+        public static final int action_forgot_password=0x7f070029;
         public static final int action_settings=0x7f070020;
+        public static final int action_sign_in_register=0x7f070027;
+        public static final int action_sign_in_short=0x7f070028;
         public static final int app_id=0x7f070021;
         public static final int app_name=0x7f07001f;
         public static final int com_facebook_choose_friends=0x7f070015;
@@ -480,6 +486,15 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_log_in_button=0x7f07000e;
         public static final int com_facebook_usersettingsfragment_logged_in=0x7f07000f;
         public static final int com_facebook_usersettingsfragment_not_logged_in=0x7f070010;
+        public static final int error_field_required=0x7f07002e;
+        public static final int error_incorrect_password=0x7f07002d;
+        public static final int error_invalid_email=0x7f07002b;
+        public static final int error_invalid_password=0x7f07002c;
+        public static final int login_progress_signing_in=0x7f07002a;
+        /**  Strings related to login 
+         */
+        public static final int prompt_email=0x7f070025;
+        public static final int prompt_password=0x7f070026;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
          */
@@ -490,6 +505,7 @@ containing a value of this type.
         public static final int pull_to_refresh_refreshing_label=0x7f070002;
         public static final int pull_to_refresh_release_label=0x7f070001;
         public static final int settings=0x7f070023;
+        public static final int title_activity_llogin=0x7f070024;
         public static final int title_facebook_login=0x7f070022;
     }
     public static final class style {
@@ -519,6 +535,7 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f090003;
+        public static final int LoginFormContainer=0x7f090004;
         public static final int com_facebook_loginview_default_style=0x7f090000;
         public static final int com_facebook_loginview_silver_style=0x7f090001;
     }

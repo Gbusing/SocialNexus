@@ -34,7 +34,8 @@
         android:layout_above="@+id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"
-        android:ems="10" />
+        android:ems="10" 
+        android:inputType="text"/>
 
     <TextView
         android:id="@+id/textView1"

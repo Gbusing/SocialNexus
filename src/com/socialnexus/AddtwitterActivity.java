@@ -6,7 +6,7 @@ import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
-import com.example.socialnexus.R;
+import com.socialnexus.R;
 
 import android.net.Uri;
 import android.os.Bundle;

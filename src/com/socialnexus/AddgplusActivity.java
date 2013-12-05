@@ -1,6 +1,6 @@
 package com.socialnexus;
 
-import com.example.socialnexus.R;
+import com.socialnexus.R;
 
 import android.os.Bundle;
 import android.app.Activity;

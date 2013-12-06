@@ -20,23 +20,8 @@ public class SplashActivity extends Activity
 		creds = getSharedPreferences("Preferences", MODE_PRIVATE);
 		twUtils = new TwitterUtilities(this, creds);
 
-		Intent newintent = getIntent();
-		if (newintent.getBooleanExtra("com.socialnexus.facebookregister", false))
-		{
-			newintent.removeExtra("com.socialnexus.facebookregister");
-			startActivity(newintent);
-		}
-		else if (newintent.getBooleanExtra("com.socialnexus.twitterregister", false))
-		{
-			twUtils.loginTwitter();
-			newintent.removeExtra("com.socialnexus.twitterregister");
-			startActivity(newintent);
-		}
-		else if (newintent.getBooleanExtra("com.socialnexus.gplusregister", false))
-		{
-			newintent.removeExtra("com.gplusnexus.facebookregister");
-			startActivity(newintent);
-		}
+		Intent intent = new Intent(this, SplashActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
@@ -55,16 +40,19 @@ public class SplashActivity extends Activity
 	protected void onNewIntent(Intent newintent)
 	{
 		super.onNewIntent(newintent);
-		Intent previntent = getIntent();
 		setIntent(newintent);
 
 		if (newintent.getData() != null && newintent.getData().toString().startsWith(TwitterUtilities.CALLBACK_URL))
 		{
 			twUtils.dealWithTwitterResponse(newintent);
-			startActivity(previntent);
+
+			newintent = new Intent(this, SplashActivity.class);
+			newintent.putExtras(propogateIntentExtras());
 		}
 		else if (newintent.getBooleanExtra("com.socialnexus.facebookregister", false))
 		{
+			newintent = new Intent(this, SplashActivity.class);
+			newintent.putExtras(propogateIntentExtras());
 			newintent.removeExtra("com.socialnexus.facebookregister");
 			startActivity(newintent);
 		}
@@ -72,12 +60,23 @@ public class SplashActivity extends Activity
 		{
 			twUtils.loginTwitter();
 			newintent.removeExtra("com.socialnexus.twitterregister");
-			startActivity(newintent);
 		}
 		else if (newintent.getBooleanExtra("com.socialnexus.gplusregister", false))
 		{
+			newintent = new Intent(this, SplashActivity.class);
+			newintent.putExtras(propogateIntentExtras());
 			newintent.removeExtra("com.gplusnexus.facebookregister");
 			startActivity(newintent);
 		}
+		else
+		{
+			newintent = new Intent(this, MainActivity.class);
+			newintent.putExtras(propogateIntentExtras());
+		}
+	}
+
+	private Bundle propogateIntentExtras()
+	{
+		return (getIntent().getExtras() == null) ? new Bundle() : getIntent().getExtras();
 	}
 }

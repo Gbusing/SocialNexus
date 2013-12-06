@@ -38,12 +38,11 @@ public class TwitterUtilities
 	private static Activity act;
 	private static Context ctx;
 
-	public TwitterUtilities(Context context, SharedPreferences prefs)
+	public TwitterUtilities(Activity activity, SharedPreferences prefs)
 	{
 		creds = prefs;
-
-		ctx = context;
-		act = (Activity) ctx;
+		act = activity;
+		ctx = (Context) activity;
 
 		mTwitter = new TwitterFactory().getInstance();
 		mTwitter.setOAuthConsumer(CONSUMER_KEY, CONSUMER_SECRET);
@@ -55,7 +54,7 @@ public class TwitterUtilities
 		{
 			mReqToken = mTwitter.getOAuthRequestToken(CALLBACK_URL);
 
-			WebView twitterSite = new WebView(ctx);
+			WebView twitterSite = new WebView(act);
 			twitterSite.loadUrl(mReqToken.getAuthenticationURL());
 
 			act.setContentView(twitterSite);

@@ -113,18 +113,14 @@ public class MainActivity extends Activity
 			startActivity(intent);
 		}
 		// Load auth keys
-		else
+		else if ((twToken == null || twSecret == null) && creds.contains(activeuser.concat("-twAccessToken"))
+				&& creds.contains(activeuser.concat("-twAccessSecret")))
 		{
-			if ((twToken == null || twSecret == null) && creds.contains(activeuser.concat("-twAccessToken"))
-					&& creds.contains(activeuser.concat("-twAccessSecret")))
-			{
-				twToken = creds.getString(activeuser.concat("-twAccessToken"), null);
-				twSecret = creds.getString(activeuser.concat("-twAccessSecret"), null);
+			twToken = creds.getString(activeuser.concat("-twAccessToken"), null);
+			twSecret = creds.getString(activeuser.concat("-twAccessSecret"), null);
 
-				intent.putExtra("com.socialnexus.".concat(activeuser.concat("-twAccessToken")), twToken);
-				intent.putExtra("com.socialnexus.".concat(activeuser.concat("-twAccessSecret")), twSecret);
-			}
-
+			intent.putExtra("com.socialnexus.".concat(activeuser.concat("-twAccessToken")), twToken);
+			intent.putExtra("com.socialnexus.".concat(activeuser.concat("-twAccessSecret")), twSecret);
 			startActivity(intent);
 		}
 	}

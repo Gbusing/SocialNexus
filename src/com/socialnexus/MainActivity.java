@@ -27,7 +27,13 @@ import android.widget.Button;
  */
 public class MainActivity extends Activity
 {
-	SharedPreferences creds;
+	private SharedPreferences creds;
+	private Intent intent;
+	private String saveduser = null;
+	private String activeuser = null;
+	private String recentemail = null;
+	private String twToken = null;
+	private String twSecret = null;
 
 	Button loginButton;
 
@@ -40,19 +46,25 @@ public class MainActivity extends Activity
 		creds = getSharedPreferences("Preferences", MODE_PRIVATE);
 
 		// Attempt to pull credentials from creds, and use it for active session
-		String saveduser = creds.getString("LoggedIn", null);
+		saveduser = creds.getString("LoggedIn", null);
+		activeuser = getIntent().getStringExtra("com.socialnexus.loggedin");
+		recentemail = creds.getString("RecentEmail", "");
+
 		if (saveduser != null)
 		{
-			Intent intent = new Intent(this, MainActivity.class);
-			intent.putExtra("com.socialnexus.loggedin", creds.getString("LoggedIn", null));
-			startActivity(intent);
+			intent = new Intent(this, MainActivity.class);
+			intent.putExtras(propogateIntentExtras());
+			intent.putExtra("com.socialnexus.loggedin", saveduser);
 		}
 		// Direct to log in page if no login credentials available.
 		else
 		{
-			Intent intent = new Intent(this, LoginActivity.class);
-			startActivity(intent);
+			intent = new Intent(this, LoginActivity.class);
+			intent.putExtras(propogateIntentExtras());
+			intent.putExtra("com.socialnexus.recentemail", recentemail);
 		}
+
+		startActivity(intent);
 	}
 
 	@Override
@@ -66,8 +78,6 @@ public class MainActivity extends Activity
 	@Override
 	public void onNewIntent(Intent newintent)
 	{
-		setIntent(newintent);
-
 		// Check for an application exit flag
 		if (newintent.getBooleanExtra("com.socialnexus.exit", false))
 		{
@@ -75,55 +85,48 @@ public class MainActivity extends Activity
 			return;
 		}
 
-		String activeuser = newintent.getStringExtra("com.socialnexus.loggedin");
-		String saveduser = creds.getString("LoggedIn", null);
+		super.onNewIntent(newintent);
+		// Intent previntent = getIntent();
+		setIntent(newintent);
+
+		saveduser = creds.getString("LoggedIn", null);
+		activeuser = getIntent().getStringExtra("com.socialnexus.loggedin");
+		intent = new Intent(this, this.getClass());
+		intent.putExtras(propogateIntentExtras());
 
 		// If no one is actively logged in...
 		if (activeuser == null)
 		{
+
 			// Check persistent credential storage
 			// If none available clear the program and close
 			if (saveduser == null)
 			{
-				Intent intent = new Intent(this, this.getClass());
-				intent.putExtras(getIntent().getExtras());
 				intent.putExtra("com.socialnexus.exit", true);
-				startActivity(intent);
 			}
 			// Pass persistent credential storage to active session
 			else
 			{
-				Intent intent = new Intent(this, MainActivity.class);
 				intent.putExtra("com.socialnexus.loggedin", saveduser);
-				startActivity(intent);
 			}
+
+			startActivity(intent);
 		}
 		// Load auth keys
 		else
 		{
-			Boolean updated = false;
-
-			Intent intent = new Intent(this, this.getClass());
-			// Save previously stored keys.
-			intent.putExtras(getIntent().getExtras());
-
-			String twToken = creds.getString(activeuser.concat("-twAccessToken"), null);
-			String twSecret = creds.getString(activeuser.concat("-twAccessSecret"), null);
-
-			if (twToken != null && twSecret != null)
+			if ((twToken == null || twSecret == null) && creds.contains(activeuser.concat("-twAccessToken"))
+					&& creds.contains(activeuser.concat("-twAccessSecret")))
 			{
+				twToken = creds.getString(activeuser.concat("-twAccessToken"), null);
+				twSecret = creds.getString(activeuser.concat("-twAccessSecret"), null);
+
 				intent.putExtra("com.socialnexus.".concat(activeuser.concat("-twAccessToken")), twToken);
 				intent.putExtra("com.socialnexus.".concat(activeuser.concat("-twAccessSecret")), twSecret);
-				updated = true;
 			}
 
-			if (updated)
-			{
-				startActivity(intent);
-			}
-
+			startActivity(intent);
 		}
-
 	}
 
 	@Override
@@ -148,8 +151,8 @@ public class MainActivity extends Activity
 	{
 		super.onBackPressed();
 
-		Intent intent = new Intent(this, MainActivity.class);
-		intent.putExtras(getIntent().getExtras());
+		intent = new Intent(this, MainActivity.class);
+		intent.putExtras(propogateIntentExtras());
 		intent.putExtra("com.socialnexus.exit", true);
 		startActivity(intent);
 	}
@@ -157,6 +160,15 @@ public class MainActivity extends Activity
 	private void logout()
 	{
 		creds.edit().remove("LoggedIn").commit();
-		finish();
+
+		intent = new Intent(this, MainActivity.class);
+		intent.putExtras(propogateIntentExtras());
+		intent.putExtra("com.socialnexus.exit", true);
+		startActivity(intent);
+	}
+
+	private Bundle propogateIntentExtras()
+	{
+		return (getIntent().getExtras() == null) ? new Bundle() : getIntent().getExtras();
 	}
 }

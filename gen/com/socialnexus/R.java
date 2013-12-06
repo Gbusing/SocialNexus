@@ -30,8 +30,8 @@ public final class R {
         public static final int FacebookBox=0x7f080014;
         public static final int GPlusBox=0x7f080016;
         public static final int TwitterBox=0x7f080015;
-        public static final int action_logout=0x7f08001c;
-        public static final int action_settings=0x7f08001b;
+        public static final int action_logout=0x7f08001d;
+        public static final int action_settings=0x7f08001c;
         public static final int addbutton=0x7f080004;
         public static final int content=0x7f08000e;
         public static final int email=0x7f080009;
@@ -50,6 +50,7 @@ public final class R {
         public static final int registerpassword2=0x7f080010;
         public static final int sign_in_button=0x7f08000c;
         public static final int slidingDrawer1=0x7f08000d;
+        public static final int splashloading=0x7f08001b;
         public static final int stayloggedBox=0x7f08000b;
         public static final int textView1=0x7f080003;
         public static final int textView2=0x7f080005;
@@ -63,6 +64,7 @@ public final class R {
         public static final int login=0x7f030002;
         public static final int main=0x7f030003;
         public static final int register=0x7f030004;
+        public static final int splash=0x7f030005;
     }
     public static final class menu {
         public static final int addfacebook=0x7f070000;
@@ -70,6 +72,7 @@ public final class R {
         public static final int login=0x7f070002;
         public static final int main=0x7f070003;
         public static final int register=0x7f070004;
+        public static final int splash=0x7f070005;
     }
     public static final class string {
         public static final int action_forgot_password=0x7f050020;

@@ -14,8 +14,6 @@ public class RegisterActivity extends Activity
 {
 	private SharedPreferences creds;
 
-	private TwitterUtilities twUtils;
-
 	private EditText mEmailView;
 	private EditText mPasswordView;
 	private EditText mPasswordView2;
@@ -32,15 +30,16 @@ public class RegisterActivity extends Activity
 
 		creds = getSharedPreferences("Preferences", MODE_PRIVATE);
 
-		// Populate fields from values passed by login page.
 		mEmailView = (EditText) findViewById(R.id.registeremail);
 		mPasswordView = (EditText) findViewById(R.id.registerpassword1);
 		mPasswordView2 = (EditText) findViewById(R.id.registerpassword2);
-		mEmailView.setText(getIntent().getExtras().getString("com.socialnexus.email"));
-		mPasswordView.setText(getIntent().getExtras().getString("com.socialnexus.password"));
 		facebookBox = (CheckBox) findViewById(R.id.FacebookBox);
 		twitterBox = (CheckBox) findViewById(R.id.TwitterBox);
 		gplusBox = (CheckBox) findViewById(R.id.GPlusBox);
+
+		// Populate fields from values passed by login page.
+		mEmailView.setText(getIntent().getStringExtra("com.socialnexus.email"));
+		mPasswordView.setText(getIntent().getStringExtra("com.socialnexus.password"));
 	}
 
 	@Override
@@ -51,20 +50,11 @@ public class RegisterActivity extends Activity
 		return true;
 	}
 
-	/**
-	 * Catch when Twitter redirects back to our {@link CALLBACK_URL} We use onNewIntent as in our manifest we have singleInstance="true" if we did not the
-	 * getOAuthAccessToken() call would fail
-	 */
 	@Override
 	protected void onNewIntent(Intent newintent)
 	{
 		super.onNewIntent(newintent);
 		setIntent(newintent);
-
-		if (newintent != null && newintent.getData().toString().startsWith(TwitterUtilities.CALLBACK_URL))
-		{
-			twUtils.dealWithTwitterResponse(newintent);
-		}
 	}
 
 	public void register(View view)
@@ -131,6 +121,10 @@ public class RegisterActivity extends Activity
 			focusView = mEmailView;
 			cancel = true;
 		}
+		else
+		{
+			creds.edit().putString("RecentEmail", mEmail).commit();
+		}
 
 		// There was an error; don't attempt login and focus the first
 		// form field with an error.
@@ -143,30 +137,17 @@ public class RegisterActivity extends Activity
 		{
 			creds.edit().putString(mEmail, mPassword).commit();
 
-			if (facebookBox.isChecked())
-			{
-				// Probably wrong
-				Intent intent = new Intent(this, AddfacebookActivity.class);
-				intent.putExtra("twitter", twitterBox.isChecked());
-				intent.putExtra("gplus", gplusBox.isChecked());
-				startActivity(intent);
-			}
-			if (twitterBox.isChecked())
-			{
-				twUtils = new TwitterUtilities(this, creds);
-				twUtils.loginTwitter();
-			}
-			if (gplusBox.isChecked())
-			{
-				// Looks like activites actually aren't the solution.
-				Intent intent = new Intent(this, AddgplusActivity.class);
-				startActivity(intent);
-			}
-
-			Intent intent = new Intent(this, MainActivity.class);
-			intent.putExtra("com.socialnexus.loggedin", mEmail);
+			Intent intent = new Intent(this, SplashActivity.class);
+			intent.putExtras(propogateIntentExtras());
+			intent.putExtra("facebookregister", facebookBox.isChecked());
+			intent.putExtra("twitterregister", twitterBox.isChecked());
+			intent.putExtra("gplusregister", gplusBox.isChecked());
 			startActivity(intent);
 		}
 	}
 
+	private Bundle propogateIntentExtras()
+	{
+		return (getIntent().getExtras() == null) ? new Bundle() : getIntent().getExtras();
+	}
 }

@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -74,14 +73,10 @@ public class TwitterUtilities
 	 */
 	public void dealWithTwitterResponse(Intent intent)
 	{
-		Uri uri = intent.getData();
-		if (uri != null && uri.toString().startsWith(CALLBACK_URL))
-		{
-			// If the user has just logged in
-			String oauthVerifier = uri.getQueryParameter("oauth_verifier");
+		// If the user has just logged in
+		String oauthVerifier = intent.getData().getQueryParameter("oauth_verifier");
 
-			authoriseNewUser(oauthVerifier);
-		}
+		authoriseNewUser(oauthVerifier);
 	}
 
 	/**
@@ -103,6 +98,8 @@ public class TwitterUtilities
 			creds.edit().putString(creds.getString("LoggedIn", null).concat("-twAccessToken"), twitterAccessToken).commit();
 			creds.edit().putString(creds.getString("LoggedIn", null).concat("-twAccessSecret"), twitterAccessSecret).commit();
 
+			Intent intent = act.getIntent();
+			intent.removeExtra("com.socialnexus.twitter");
 			// Set the content view back after we changed to a webview
 			// act.setContentView(R.layout.main);
 

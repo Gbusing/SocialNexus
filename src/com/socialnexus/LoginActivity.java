@@ -41,7 +41,9 @@ public class LoginActivity extends Activity
 		creds = getSharedPreferences("Preferences", MODE_PRIVATE);
 
 		mStayLoggedIn = (CheckBox) findViewById(R.id.stayloggedBox);
+		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
 		mEmailView = (EditText) findViewById(R.id.email);
+		mEmailView.setText(getIntent().getStringExtra("com.socialnexus.recentemail"));
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener()
 		{
@@ -57,7 +59,14 @@ public class LoginActivity extends Activity
 			}
 		});
 
-		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
+		if (getIntent().getStringExtra("com.socialnexus.recentemail").length() == 0)
+		{
+			mEmailView.requestFocus();
+		}
+		else
+		{
+			mPasswordView.requestFocus();
+		}
 
 		findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener()
 		{
@@ -132,6 +141,10 @@ public class LoginActivity extends Activity
 			focusView = mEmailView;
 			cancel = true;
 		}
+		else
+		{
+			creds.edit().putString("RecentEmail", mEmail);
+		}
 
 		if (cancel)
 		{
@@ -141,34 +154,40 @@ public class LoginActivity extends Activity
 		}
 		else
 		{
+			Intent intent;
+
 			// Perform the user login attempt.
 			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 
 			// Email has no associated login, jump to register page
 			if (creds.getString(mEmail, null) == null)
 			{
-				Intent intent = new Intent(this, RegisterActivity.class);
+				intent = new Intent(this, RegisterActivity.class);
+				intent.putExtras(propogateIntentExtras());
 				intent.putExtra("com.socialnexus.email", mEmail);
 				intent.putExtra("com.socialnexus.password", mPassword);
 				startActivity(intent);
 			}
-			// Successful login
-			else if (creds.getString(mEmail, null).compareTo(mPassword) == 0)
-			{
-				if (mStayLoggedIn.isChecked())
-				{
-					creds.edit().putString("LoggedIn", mEmail).commit();
-				}
-
-				Intent intent = new Intent(this, MainActivity.class);
-				intent.putExtra("com.socialnexus.loggedin", mEmail);
-				startActivity(intent);
-			}
-			else
+			// Wrong password
+			else if (creds.getString(mEmail, null).compareTo(mPassword) != 0)
 			{
 				mPasswordView.setError(getString(R.string.wrong_password));
 				mPasswordView.requestFocus();
 			}
+			else if (mStayLoggedIn.isChecked())
+			{
+				creds.edit().putString("LoggedIn", mEmail).commit();
+				intent = new Intent(this, MainActivity.class);
+				intent.putExtras(propogateIntentExtras());
+				intent.putExtra("com.socialnexus.loggedin", mEmail);
+				startActivity(intent);
+			}
+
 		}
+	}
+
+	private Bundle propogateIntentExtras()
+	{
+		return (getIntent().getExtras() == null) ? new Bundle() : getIntent().getExtras();
 	}
 }

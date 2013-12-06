@@ -163,7 +163,7 @@ public class LoginActivity extends Activity
 			if (creds.getString(mEmail, null) == null)
 			{
 				intent = new Intent(this, RegisterActivity.class);
-				intent.putExtras(propogateIntentExtras());
+				intent.putExtras(getIntent());
 				intent.putExtra("com.socialnexus.email", mEmail);
 				intent.putExtra("com.socialnexus.password", mPassword);
 				startActivity(intent);
@@ -178,16 +178,11 @@ public class LoginActivity extends Activity
 			{
 				creds.edit().putString("LoggedIn", mEmail).commit();
 				intent = new Intent(this, MainActivity.class);
-				intent.putExtras(propogateIntentExtras());
+				intent.putExtras(getIntent());
 				intent.putExtra("com.socialnexus.loggedin", mEmail);
 				startActivity(intent);
 			}
 
 		}
-	}
-
-	private Bundle propogateIntentExtras()
-	{
-		return (getIntent().getExtras() == null) ? new Bundle() : getIntent().getExtras();
 	}
 }

@@ -21,6 +21,7 @@ public class SplashActivity extends Activity
 		twUtils = new TwitterUtilities(this, creds);
 
 		Intent intent = new Intent(this, SplashActivity.class);
+		intent.putExtras(getIntent());
 		startActivity(intent);
 	}
 
@@ -47,12 +48,12 @@ public class SplashActivity extends Activity
 			twUtils.dealWithTwitterResponse(newintent);
 
 			newintent = new Intent(this, SplashActivity.class);
-			newintent.putExtras(propogateIntentExtras());
+			newintent.putExtras(getIntent());
 		}
 		else if (newintent.getBooleanExtra("com.socialnexus.facebookregister", false))
 		{
 			newintent = new Intent(this, SplashActivity.class);
-			newintent.putExtras(propogateIntentExtras());
+			newintent.putExtras(getIntent());
 			newintent.removeExtra("com.socialnexus.facebookregister");
 			startActivity(newintent);
 		}
@@ -64,19 +65,14 @@ public class SplashActivity extends Activity
 		else if (newintent.getBooleanExtra("com.socialnexus.gplusregister", false))
 		{
 			newintent = new Intent(this, SplashActivity.class);
-			newintent.putExtras(propogateIntentExtras());
+			newintent.putExtras(getIntent());
 			newintent.removeExtra("com.gplusnexus.facebookregister");
 			startActivity(newintent);
 		}
 		else
 		{
 			newintent = new Intent(this, MainActivity.class);
-			newintent.putExtras(propogateIntentExtras());
+			newintent.putExtras(getIntent());
 		}
-	}
-
-	private Bundle propogateIntentExtras()
-	{
-		return (getIntent().getExtras() == null) ? new Bundle() : getIntent().getExtras();
 	}
 }

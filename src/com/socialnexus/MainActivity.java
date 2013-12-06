@@ -53,14 +53,14 @@ public class MainActivity extends Activity
 		if (saveduser != null)
 		{
 			intent = new Intent(this, MainActivity.class);
-			intent.putExtras(propogateIntentExtras());
+			intent.putExtras(getIntent());
 			intent.putExtra("com.socialnexus.loggedin", saveduser);
 		}
 		// Direct to log in page if no login credentials available.
 		else
 		{
 			intent = new Intent(this, LoginActivity.class);
-			intent.putExtras(propogateIntentExtras());
+			intent.putExtras(getIntent());
 			intent.putExtra("com.socialnexus.recentemail", recentemail);
 		}
 
@@ -92,7 +92,7 @@ public class MainActivity extends Activity
 		saveduser = creds.getString("LoggedIn", null);
 		activeuser = getIntent().getStringExtra("com.socialnexus.loggedin");
 		intent = new Intent(this, this.getClass());
-		intent.putExtras(propogateIntentExtras());
+		intent.putExtras(getIntent());
 
 		// If no one is actively logged in...
 		if (activeuser == null)
@@ -148,7 +148,7 @@ public class MainActivity extends Activity
 		super.onBackPressed();
 
 		intent = new Intent(this, MainActivity.class);
-		intent.putExtras(propogateIntentExtras());
+		intent.putExtras(getIntent());
 		intent.putExtra("com.socialnexus.exit", true);
 		startActivity(intent);
 	}
@@ -158,13 +158,8 @@ public class MainActivity extends Activity
 		creds.edit().remove("LoggedIn").commit();
 
 		intent = new Intent(this, MainActivity.class);
-		intent.putExtras(propogateIntentExtras());
+		intent.putExtras(getIntent());
 		intent.putExtra("com.socialnexus.exit", true);
 		startActivity(intent);
-	}
-
-	private Bundle propogateIntentExtras()
-	{
-		return (getIntent().getExtras() == null) ? new Bundle() : getIntent().getExtras();
 	}
 }

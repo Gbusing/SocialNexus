@@ -138,16 +138,11 @@ public class RegisterActivity extends Activity
 			creds.edit().putString(mEmail, mPassword).commit();
 
 			Intent intent = new Intent(this, SplashActivity.class);
-			intent.putExtras(propogateIntentExtras());
-			intent.putExtra("facebookregister", facebookBox.isChecked());
-			intent.putExtra("twitterregister", twitterBox.isChecked());
-			intent.putExtra("gplusregister", gplusBox.isChecked());
+			intent.putExtras(getIntent());
+			intent.putExtra("com.socialnexus.facebookregister", facebookBox.isChecked());
+			intent.putExtra("com.socialnexus.twitterregister", twitterBox.isChecked());
+			intent.putExtra("com.socialnexus.gplusregister", gplusBox.isChecked());
 			startActivity(intent);
 		}
-	}
-
-	private Bundle propogateIntentExtras()
-	{
-		return (getIntent().getExtras() == null) ? new Bundle() : getIntent().getExtras();
 	}
 }

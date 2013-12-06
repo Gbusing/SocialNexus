@@ -25,7 +25,7 @@ public class TwitterUtilities
 	/**
 	 * The url that Twitter will redirect to after a user log's in - this will be picked up by your app manifest and redirected into this activity
 	 */
-	public static final String CALLBACK_URL = "social-nexus-android:///";
+	public static final String CALLBACK_URL = "social-nexus-android://callback";
 
 	public static String twitterAccessToken = "";
 	public static String twitterAccessSecret = "";
@@ -75,7 +75,7 @@ public class TwitterUtilities
 		// If the user has just logged in
 		String oauthVerifier = intent.getData().getQueryParameter("oauth_verifier");
 
-		authoriseNewUser(oauthVerifier);
+		authoriseNewUser(oauthVerifier, intent.getStringExtra("com.socialnexus.loggedin"));
 	}
 
 	/**
@@ -83,10 +83,12 @@ public class TwitterUtilities
 	 * 
 	 * @param oauthVerifier
 	 */
-	private void authoriseNewUser(String oauthVerifier)
+	private void authoriseNewUser(String oauthVerifier, String activeuser)
 	{
 		try
 		{
+
+			Intent intent = act.getIntent();
 			AccessToken at = mTwitter.getOAuthAccessToken(mReqToken, oauthVerifier);
 			mTwitter.setOAuthAccessToken(at);
 
@@ -94,13 +96,13 @@ public class TwitterUtilities
 			twitterAccessToken = at.getToken();
 			twitterAccessSecret = at.getTokenSecret();
 
-			creds.edit().putString(creds.getString("LoggedIn", null).concat("-twAccessToken"), twitterAccessToken).commit();
-			creds.edit().putString(creds.getString("LoggedIn", null).concat("-twAccessSecret"), twitterAccessSecret).commit();
-
-			Intent intent = act.getIntent();
-			intent.removeExtra("com.socialnexus.twitter");
+			if (activeuser != null)
+			{
+				creds.edit().putString(activeuser.concat("-twToken"), twitterAccessToken).commit();
+				creds.edit().putString(activeuser.concat("-twSecret"), twitterAccessSecret).commit();
+			}
 			// Set the content view back after we changed to a webview
-			// act.setContentView(R.layout.main);
+			act.setContentView(R.layout.main);
 
 		}
 		catch (TwitterException e)

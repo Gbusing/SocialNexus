@@ -33,17 +33,18 @@
         <activity
             android:name="com.socialnexus.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:launchMode="singleTask"
-            android:process=":register" >
+            android:launchMode="singleTask">
 
         </activity>
         <activity 
 			android:name="com.socialnexus.SplashActivity"
 			android:label="@string/title_activity_splash"
-			android:launchMode="singleTask"
-			android:process=":register" >
+			android:launchMode="singleInstance">
 			<intent-filter>
-				<data android:scheme="social-nexus-android" />
+			    <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="social-nexus-android" android:host="callback" />
 			</intent-filter>
         </activity>        
     </application>
